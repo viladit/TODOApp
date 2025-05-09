@@ -1,4 +1,4 @@
-package Service;
+package service;
 
 import commands.*;
 import commands.utils.CommandInterface;
@@ -10,16 +10,16 @@ import java.util.Scanner;
 public class CommandController {
     private final CommandService commandService;
     Map<String, CommandInterface> commands = new HashMap<>();
-    Scanner input = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
     public CommandController(CommandService commandService) {
         this.commandService = commandService;
-        commands.put("add", new AddCommand(commandService));
+        commands.put("add", new AddCommand(commandService, scanner));
         commands.put("list", new ListCommand(commandService));
-        commands.put("edit", new EditCommand(commandService));
-        commands.put("delete", new DeleteCommand(commandService));
-        commands.put("filter", new FilterCommand(commandService));
-        commands.put("sort", new SortCommand(commandService));
+        commands.put("edit", new EditCommand(commandService, scanner));
+        commands.put("delete", new DeleteCommand(commandService, scanner));
+        commands.put("filter", new FilterCommand(commandService, scanner));
+        commands.put("sort", new SortCommand(commandService, scanner));
         commands.put("exit", new ExitCommand(commandService));
     }
 
@@ -30,7 +30,7 @@ public class CommandController {
                 .forEach(System.out::println);
         while (true) {
             System.out.print("\nВведите команду -> ");
-            CommandInterface command = commands.get(input.next());
+            CommandInterface command = commands.get(scanner.next());
             if (command != null) {
                 command.execute();
             } else {

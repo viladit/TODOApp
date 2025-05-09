@@ -1,6 +1,6 @@
 package commands;
 
-import Service.CommandService;
+import service.CommandService;
 import commands.utils.CommandInterface;
 import model.Status;
 import model.Task;
@@ -15,10 +15,11 @@ import java.util.stream.IntStream;
 
 public class EditCommand implements CommandInterface {
     private final CommandService commandService;
-    Scanner input = new Scanner(System.in);
+    private final Scanner scanner;
 
-    public EditCommand(CommandService commandService) {
+    public EditCommand(CommandService commandService, Scanner scanner) {
         this.commandService = commandService;
+        this.scanner = scanner;
     }
 
     @Override
@@ -36,7 +37,7 @@ public class EditCommand implements CommandInterface {
         System.out.print("Выберите номер задачи для редактирования: ");
         int taskNumber;
         try {
-            taskNumber = Integer.parseInt(input.nextLine()) - 1;
+            taskNumber = Integer.parseInt(scanner.nextLine()) - 1;
             if (taskNumber < 0 || taskNumber >= tasks.size()) {
                 System.out.println("Неверный номер задачи!");
                 return;
@@ -57,7 +58,7 @@ public class EditCommand implements CommandInterface {
 
         int fieldChoice;
         try {
-            fieldChoice = Integer.parseInt(input.nextLine());
+            fieldChoice = Integer.parseInt(scanner.nextLine());
             if (fieldChoice < 1 || fieldChoice > 4) {
                 System.out.println("Неверный выбор!");
                 return;
@@ -79,17 +80,17 @@ public class EditCommand implements CommandInterface {
 
     private void editName(Task task) {
         System.out.print("Введите новое название: ");
-        String newName = input.nextLine();
+        String newName = scanner.nextLine();
         while (newName.isBlank()) {
             System.out.print("Название не может быть пустым! Введите снова: ");
-            newName = input.nextLine();
+            newName = scanner.nextLine();
         }
         task.setName(newName);
     }
 
     private void editDescription(Task task) {
         System.out.print("Введите новое описание (Enter чтобы оставить пустым): ");
-        String newDesc = input.nextLine();
+        String newDesc = scanner.nextLine();
         task.setDescription(newDesc.isEmpty() ? null : newDesc);
     }
 
@@ -97,7 +98,7 @@ public class EditCommand implements CommandInterface {
         System.out.print("Введите новую дату (дд.мм.гггг): ");
         while (true) {
             try {
-                String dateStr = input.nextLine();
+                String dateStr = scanner.nextLine();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
                 LocalDate newDate = LocalDate.parse(dateStr, formatter);
                 task.setDate(newDate);
@@ -116,7 +117,7 @@ public class EditCommand implements CommandInterface {
         System.out.print("Введите новый статус: ");
         while (true) {
             try {
-                String statusStr = input.nextLine().toUpperCase().replace(" ", "_");
+                String statusStr = scanner.nextLine().toUpperCase().replace(" ", "_");
                 Status newStatus = Status.valueOf(statusStr);
                 task.setStatus(newStatus);
                 break;

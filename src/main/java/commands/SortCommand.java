@@ -1,6 +1,6 @@
 package commands;
 
-import Service.CommandService;
+import service.CommandService;
 import commands.utils.CommandInterface;
 import model.Task;
 
@@ -12,10 +12,11 @@ import java.util.stream.IntStream;
 
 public class SortCommand implements CommandInterface {
     private final CommandService commandService;
-    Scanner input = new Scanner(System.in);
+    private final Scanner scanner;
 
-    public SortCommand(CommandService commandService) {
+    public SortCommand(CommandService commandService, Scanner scanner) {
         this.commandService = commandService;
+        this.scanner = scanner;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class SortCommand implements CommandInterface {
         System.out.print("Выберите тип сортировки (1-6): ");
         int choice;
         try {
-            choice = Integer.parseInt(input.nextLine());
+            choice = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
             System.out.println("Ошибка: введите число от 1 до 6!");
             return;

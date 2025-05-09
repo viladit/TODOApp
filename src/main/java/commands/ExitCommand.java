@@ -1,6 +1,6 @@
 package commands;
 
-import Service.CommandService;
+import service.CommandService;
 import commands.utils.CommandInterface;
 
 public class ExitCommand implements CommandInterface {

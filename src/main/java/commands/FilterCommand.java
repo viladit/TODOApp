@@ -1,6 +1,6 @@
 package commands;
 
-import Service.CommandService;
+import service.CommandService;
 import commands.utils.CommandInterface;
 import model.Status;
 import model.Task;
@@ -12,10 +12,11 @@ import java.util.stream.IntStream;
 
 public class FilterCommand implements CommandInterface {
     private final CommandService commandService;
-    Scanner input = new Scanner(System.in);
+    private final Scanner scanner;
 
-    public FilterCommand(CommandService commandService) {
+    public FilterCommand(CommandService commandService, Scanner scanner) {
         this.commandService = commandService;
+        this.scanner = scanner;
     }
 
     @Override
@@ -25,7 +26,7 @@ public class FilterCommand implements CommandInterface {
                 .forEach(status -> System.out.println("- " + status));
 
         System.out.print("Введите статус для фильтрации: ");
-        String statusInput = input.nextLine().toUpperCase();
+        String statusInput = scanner.nextLine().toUpperCase();
 
         try {
             Status status = Status.valueOf(statusInput.replace(" ", "_"));
