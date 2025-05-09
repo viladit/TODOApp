@@ -20,14 +20,14 @@ A simple console-based task management application built with Java.
 - Git (version control)
 
 ## Project Structure
-src/
-├── main/
-│ ├── java/
-│ │ ├── commands/ # Commands pakage
-│ │ ├── service/ # All of the services
-│ │ ├── model/ # Task DTO
-│ │ └── AppMain.java # Entry point
-│ 
-├── test/
-│ ├── java/
-│ │ ├── commandsTests/ # CommandsTests pakage
+src/ \
+├── main/ \
+│ ├── java/ \
+│ │ ├── commands/ # Commands pakage \
+│ │ ├── service/ # All of the services \
+│ │ ├── model/ # Task DTO \
+│ │ └── AppMain.java # Entry point \
+│  \
+├── test/ \
+│ ├── java/ \
+│ │ ├── commandsTests/ # CommandsTests pakage 
