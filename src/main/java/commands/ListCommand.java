@@ -16,6 +16,10 @@ public class ListCommand implements CommandInterface {
     @Override
     public void execute() {
         List<Task> taskList = commandService.getTasks();
+        if (taskList.isEmpty()) {
+            System.out.println("Задач не найдено!");
+            return;
+        }
         taskList
                 .forEach(System.out::println);
     }
